@@ -6,14 +6,29 @@ import UIKit
 
 struct ContentView: View {
     @State private var selectedItem: PhotosPickerItem?
+    @State private var currentImage: Image?
 
     var body: some View {
+        if let currentImage {
+            VStack {
+                Text("Current selection")
+                currentImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding()
+                dismissButton
+            }
+        } else {
+            photoPicker
+        }
+    }
+
+    var photoPicker: some View {
         PhotosPicker(
             selection: $selectedItem,
-            matching: .images,
-            photoLibrary: .shared()
+            matching: .images
         ) {
-            Text("Select a photo from your library")
+            Label("Select a photo from your library", systemImage: "photo")
         }
         .onChange(of: selectedItem) { newItem in
             Task {
@@ -21,11 +36,21 @@ struct ContentView: View {
                     let data = try? await newItem?.loadTransferable(type: Data.self),
                     let image = UIImage(data: data)
                 {
-                    print(image.size)
+                    await MainActor.run {
+                        self.currentImage = Image(uiImage: image)
+                    }
                     // process image
                 }
             }
         }
+    }
+
+    var dismissButton: some View {
+        Button(action: {
+            self.currentImage = nil
+        }, label: {
+            Label("Dismiss current selection", systemImage: "cancel")
+        })
     }
 }
 
