@@ -1,16 +1,31 @@
 //
 
 import SwiftUI
+import PhotosUI
+import UIKit
 
 struct ContentView: View {
+    @State private var selectedItem: PhotosPickerItem?
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        PhotosPicker(
+            selection: $selectedItem,
+            matching: .images,
+            photoLibrary: .shared()
+        ) {
+            Text("Select a photo from your library")
         }
-        .padding()
+        .onChange(of: selectedItem) { newItem in
+            Task {
+                if
+                    let data = try? await newItem?.loadTransferable(type: Data.self),
+                    let image = UIImage(data: data)
+                {
+                    print(image.size)
+                    // process image
+                }
+            }
+        }
     }
 }
 
