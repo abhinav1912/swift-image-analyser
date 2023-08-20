@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A80FDAA62A924E82008C8995 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A80FDAA52A924E82008C8995 /* MobileNetV2.mlmodel */; };
+		A80FDAA82A928208008C8995 /* ClassificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80FDAA72A928208008C8995 /* ClassificationViewModel.swift */; };
 		A8C6D7F72A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6D7F62A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift */; };
 		A8C6D7F92A8F56EB00A4EA22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6D7F82A8F56EB00A4EA22 /* ContentView.swift */; };
 		A8C6D7FB2A8F56EC00A4EA22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C6D7FA2A8F56EC00A4EA22 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		A80FDAA52A924E82008C8995 /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
+		A80FDAA72A928208008C8995 /* ClassificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationViewModel.swift; sourceTree = "<group>"; };
 		A8C6D7F32A8F56EB00A4EA22 /* SwiftImageAnalyser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftImageAnalyser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C6D7F62A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftImageAnalyserApp.swift; sourceTree = "<group>"; };
 		A8C6D7F82A8F56EB00A4EA22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				A8C6D7FA2A8F56EC00A4EA22 /* Assets.xcassets */,
 				A8C6D7FC2A8F56EC00A4EA22 /* Preview Content */,
 				A8C6D8042A8FBEDD00A4EA22 /* ClassifierComposer.swift */,
+				A80FDAA72A928208008C8995 /* ClassificationViewModel.swift */,
 			);
 			path = SwiftImageAnalyser;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				A8C6D7F72A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift in Sources */,
 				A80FDAA62A924E82008C8995 /* MobileNetV2.mlmodel in Sources */,
 				A8C6D8052A8FBEDD00A4EA22 /* ClassifierComposer.swift in Sources */,
+				A80FDAA82A928208008C8995 /* ClassificationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
