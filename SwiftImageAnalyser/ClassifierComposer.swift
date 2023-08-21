@@ -23,4 +23,5 @@ class ClassifierComposer {
 enum CustomErrors: Error {
     case classifierInitFailed
     case visionModelInitFailed
+    case noClassificationResults
 }

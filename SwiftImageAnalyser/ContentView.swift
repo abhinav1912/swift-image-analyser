@@ -17,6 +17,7 @@ struct ContentView: View {
                     .aspectRatio(contentMode: .fit)
                     .padding()
                 dismissButton
+                detectButton
             }
         } else {
             photoPicker
@@ -49,7 +50,15 @@ struct ContentView: View {
         Button(action: {
             self.currentImage = nil
         }, label: {
-            Label("Dismiss current selection", systemImage: "cancel")
+            Label("Dismiss current selection", systemImage: "eraser")
+        })
+    }
+
+    var detectButton: some View {
+        Button(action: {
+            self.currentImage = nil
+        }, label: {
+            Label("Detect objects in the image", systemImage: "checkmark")
         })
     }
 }
