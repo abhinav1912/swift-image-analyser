@@ -4,16 +4,16 @@ import SwiftUI
 import Vision
 
 class ClassificationViewModel: ObservableObject {
-    let classificationModel: VNCoreMLModel
+    lazy var classificationModel = getClassificationModel()
+    var initError: CustomErrors? = nil
     @Published var results: String?
     @Published var predictions = [Prediction]()
 
-    init() throws {
-        self.classificationModel = try ClassifierComposer.createImageClassifier()
-    }
-
     func detectObjects(for image: CGImage) throws {
-        let request = VNCoreMLRequest(model: self.classificationModel)
+        guard let classificationModel else {
+            throw initError ?? CustomErrors.classifierInitFailed
+        }
+        let request = VNCoreMLRequest(model: classificationModel)
         request.imageCropAndScaleOption = .centerCrop
         let handler = VNImageRequestHandler(cgImage: image)
         try handler.perform([request])
@@ -34,6 +34,19 @@ class ClassificationViewModel: ObservableObject {
         }
 
         self.predictions = predictions
+    }
+
+    // MARK: Private Methods
+    private func getClassificationModel() -> VNCoreMLModel? {
+        do {
+            return try ClassifierComposer.createImageClassifier()
+        } catch let error as CustomErrors {
+            print(error)
+            self.initError = error
+        } catch {
+            print("Unexpected Error.")
+        }
+        return nil
     }
 }
 
