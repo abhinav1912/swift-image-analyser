@@ -6,26 +6,36 @@ import UIKit
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: ClassificationViewModel
+    @StateObject var navigationManager = NavigationManager.shared
     @State private var selectedItem: PhotosPickerItem?
     @State private var currentImage: SelectedImage?
     @State private var showError = false
 
     var body: some View {
-        if let currentImage {
+        NavigationStack(path: $navigationManager.path) {
             VStack {
-                Text("Current selection")
-                currentImage.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding()
-                dismissButton
-                detectButton
+                if let currentImage {
+                    Text("Current selection")
+                    currentImage.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding()
+                    dismissButton
+                    detectButton
+                } else {
+                    photoPicker
+                }
             }
             .alert("Couldn't make predictions", isPresented: self.$showError) {
                 Button("Ok", role: .cancel) {}
             }
-        } else {
-            photoPicker
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .prediction(let result):
+                    // TODO: Add correct view
+                    Text("\(result[0].identifier): \(result[0].confidencePercentage)%")
+                }
+            }
         }
     }
 
@@ -56,6 +66,7 @@ struct ContentView: View {
 
     var dismissButton: some View {
         Button(action: {
+            navigationManager.pushToStack(.prediction(result: [Prediction(identifier: "Test", confidencePercentage: "55")]))
             self.currentImage = nil
         }, label: {
             Label("Dismiss current selection", systemImage: "eraser")

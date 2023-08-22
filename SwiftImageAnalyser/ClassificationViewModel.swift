@@ -50,7 +50,7 @@ class ClassificationViewModel: ObservableObject {
     }
 }
 
-struct Prediction {
+struct Prediction: Hashable {
     let identifier: String
     let confidencePercentage: String
 }
