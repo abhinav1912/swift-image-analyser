@@ -24,6 +24,7 @@ struct ContentView: View {
                     detectButton
                 } else {
                     photoPicker
+                    settingsButton
                 }
             }
             .alert("Couldn't make predictions", isPresented: self.$showError) {
@@ -34,6 +35,8 @@ struct ContentView: View {
                 case .prediction(let result):
                     // TODO: Add correct view
                     Text("\(result[0].identifier): \(result[0].confidencePercentage)%")
+                case .settings:
+                    UserPreferencesView()
                 }
             }
         }
@@ -62,6 +65,14 @@ struct ContentView: View {
                 }
             }
         }
+    }
+
+    var settingsButton: some View {
+        Button(action: {
+            navigationManager.pushToStack(.settings)
+        }, label: {
+            Text("Change settings")
+        })
     }
 
     var dismissButton: some View {

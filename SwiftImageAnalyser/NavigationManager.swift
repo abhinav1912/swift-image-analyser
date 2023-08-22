@@ -19,4 +19,5 @@ class NavigationManager: ObservableObject {
 
 enum Route: Hashable {
     case prediction(result: [Prediction])
+    case settings
 }
