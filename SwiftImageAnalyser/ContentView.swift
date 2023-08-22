@@ -5,14 +5,16 @@ import PhotosUI
 import UIKit
 
 struct ContentView: View {
+    @EnvironmentObject var viewModel: ClassificationViewModel
     @State private var selectedItem: PhotosPickerItem?
-    @State private var currentImage: Image?
+    @State private var currentImage: SelectedImage?
+    @State private var showError = false
 
     var body: some View {
         if let currentImage {
             VStack {
                 Text("Current selection")
-                currentImage
+                currentImage.image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding()
@@ -35,12 +37,15 @@ struct ContentView: View {
             Task {
                 if
                     let data = try? await newItem?.loadTransferable(type: Data.self),
-                    let image = UIImage(data: data)
+                    let image = UIImage(data: data),
+                    let cgImage = image.cgImage
                 {
                     await MainActor.run {
-                        self.currentImage = Image(uiImage: image)
+                        self.currentImage = SelectedImage(
+                            image: Image(uiImage: image),
+                            cgImage: cgImage
+                        )
                     }
-                    // process image
                 }
             }
         }
@@ -56,7 +61,16 @@ struct ContentView: View {
 
     var detectButton: some View {
         Button(action: {
-            self.currentImage = nil
+            if let currentImage {
+                do {
+                    try viewModel.detectObjects(for: currentImage.cgImage)
+                } catch {
+                    print(error)
+                    self.showError = true
+                }
+            } else {
+                self.showError = true
+            }
         }, label: {
             Label("Detect objects in the image", systemImage: "checkmark")
         })
@@ -67,4 +81,9 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+
+struct SelectedImage {
+    let image: Image
+    let cgImage: CGImage
 }
