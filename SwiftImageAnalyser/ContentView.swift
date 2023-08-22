@@ -21,6 +21,9 @@ struct ContentView: View {
                 dismissButton
                 detectButton
             }
+            .alert("Couldn't make predictions", isPresented: self.$showError) {
+                Button("Ok", role: .cancel) {}
+            }
         } else {
             photoPicker
         }
