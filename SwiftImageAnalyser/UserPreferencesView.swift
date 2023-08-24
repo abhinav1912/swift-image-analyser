@@ -3,8 +3,8 @@
 import SwiftUI
 
 struct UserPreferencesView: View {
-    @State var maxNumberOfPredictions = 5
-    @State var confidenceCutOff = 0.2
+    @AppStorage("maxNumberOfPredictions") var maxNumberOfPredictions = 5
+    @AppStorage("confidenceCutOff") var confidenceCutOff = 0.2
 
     var body: some View {
         Text("Max number of predictions")
@@ -13,7 +13,7 @@ struct UserPreferencesView: View {
             .padding()
         Text("\(maxNumberOfPredictions)")
         Divider()
-
+        
         Text("Confidence cut-off")
             .padding()
         cutOffConfidenceSlider
@@ -21,17 +21,6 @@ struct UserPreferencesView: View {
         Text(String(format: "%.1f", confidenceCutOff))
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.large)
-        Divider()
-        Spacer()
-
-        saveButton
-    }
-
-    var saveButton: some View {
-        Button(
-            "Save Changes",
-            action: {}
-        )
     }
 
     var predictionCountSlider: some View {
@@ -77,6 +66,6 @@ class UserPreferences {
 
     private init() {}
 
-    var maxNumberOfPredictions = 5
-    var confidenceCutOff = 0.2
+    @AppStorage("maxNumberOfPredictions") var maxNumberOfPredictions = 5
+    @AppStorage("confidenceCutOff") var confidenceCutOff = 0.2
 }
