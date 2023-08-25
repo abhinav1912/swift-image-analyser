@@ -33,11 +33,16 @@ struct ContentView: View {
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .prediction(let result):
-                    // TODO: Add correct view
-                    Text("\(result[0].identifier): \(result[0].confidencePercentage)%")
+                    PredictionsView(predictions: result)
                 case .settings:
                     UserPreferencesView()
                 }
+            }
+            .onAppear {
+                resetState()
+            }
+            .onChange(of: viewModel.predictions) { predictions in
+                navigationManager.pushToStack(.prediction(result: predictions))
             }
         }
     }
@@ -50,9 +55,10 @@ struct ContentView: View {
             Label("Select a photo from your library", systemImage: "photo")
         }
         .onChange(of: selectedItem) { newItem in
+            guard let newItem else { return }
             Task {
                 if
-                    let data = try? await newItem?.loadTransferable(type: Data.self),
+                    let data = try? await newItem.loadTransferable(type: Data.self),
                     let image = UIImage(data: data),
                     let cgImage = image.cgImage
                 {
@@ -77,7 +83,6 @@ struct ContentView: View {
 
     var dismissButton: some View {
         Button(action: {
-            navigationManager.pushToStack(.prediction(result: [Prediction(identifier: "Test", confidencePercentage: "55")]))
             self.currentImage = nil
         }, label: {
             Label("Dismiss current selection", systemImage: "eraser")
@@ -99,6 +104,14 @@ struct ContentView: View {
         }, label: {
             Label("Detect objects in the image", systemImage: "checkmark")
         })
+    }
+
+    // MARK: Private methods
+
+    private func resetState() {
+        viewModel.predictions = []
+        selectedItem = nil
+        currentImage = nil
     }
 }
 

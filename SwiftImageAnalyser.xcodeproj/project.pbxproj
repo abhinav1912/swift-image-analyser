@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A800EA432A98F3C2009443C4 /* PredictionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A800EA422A98F3C2009443C4 /* PredictionsView.swift */; };
 		A80FDAA62A924E82008C8995 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A80FDAA52A924E82008C8995 /* MobileNetV2.mlmodel */; };
 		A80FDAA82A928208008C8995 /* ClassificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80FDAA72A928208008C8995 /* ClassificationViewModel.swift */; };
 		A81F736A2A94EDCF0006E9F9 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81F73692A94EDCF0006E9F9 /* NavigationManager.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A800EA422A98F3C2009443C4 /* PredictionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionsView.swift; sourceTree = "<group>"; };
 		A80FDAA52A924E82008C8995 /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
 		A80FDAA72A928208008C8995 /* ClassificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationViewModel.swift; sourceTree = "<group>"; };
 		A81F73692A94EDCF0006E9F9 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				A80FDAA72A928208008C8995 /* ClassificationViewModel.swift */,
 				A81F73692A94EDCF0006E9F9 /* NavigationManager.swift */,
 				A81F736D2A95182E0006E9F9 /* UserPreferencesView.swift */,
+				A800EA422A98F3C2009443C4 /* PredictionsView.swift */,
 			);
 			path = SwiftImageAnalyser;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				A8C6D8052A8FBEDD00A4EA22 /* ClassifierComposer.swift in Sources */,
 				A81F736E2A95182E0006E9F9 /* UserPreferencesView.swift in Sources */,
 				A80FDAA82A928208008C8995 /* ClassificationViewModel.swift in Sources */,
+				A800EA432A98F3C2009443C4 /* PredictionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

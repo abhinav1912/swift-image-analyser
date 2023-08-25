@@ -6,7 +6,6 @@ import Vision
 class ClassificationViewModel: ObservableObject {
     lazy var classificationModel = getClassificationModel()
     var initError: CustomErrors? = nil
-    @Published var results: String?
     @Published var predictions = [Prediction]()
     @ObservedObject var userPreferences: UserPreferences
 
