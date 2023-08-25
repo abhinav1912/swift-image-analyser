@@ -60,7 +60,7 @@ struct UserPreferencesView: View {
         }
 }
 
-class UserPreferences {
+class UserPreferences: ObservableObject {
 
     static let sharedInstance = UserPreferences()
 

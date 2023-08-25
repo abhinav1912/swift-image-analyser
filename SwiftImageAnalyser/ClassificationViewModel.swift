@@ -8,6 +8,11 @@ class ClassificationViewModel: ObservableObject {
     var initError: CustomErrors? = nil
     @Published var results: String?
     @Published var predictions = [Prediction]()
+    @ObservedObject var userPreferences: UserPreferences
+
+    init(userPreferences: UserPreferences) {
+        self.userPreferences = userPreferences
+    }
 
     func detectObjects(for image: CGImage) throws {
         guard let classificationModel else {
@@ -22,11 +27,19 @@ class ClassificationViewModel: ObservableObject {
             throw CustomErrors.noClassificationResults
         }
 
-        let predictions = results.map { observation in
+        var predictions = results.map { observation in
             Prediction(
                 identifier: observation.identifier,
                 confidencePercentage: observation.confidence.description
             )
+        }
+
+        predictions = predictions.filter {
+            Double($0.confidencePercentage) ?? .zero >= userPreferences.confidenceCutOff
+        }
+
+        if predictions.count > userPreferences.maxNumberOfPredictions {
+            predictions = Array(predictions[0..<userPreferences.maxNumberOfPredictions])
         }
 
         guard predictions.count > .zero else {

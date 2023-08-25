@@ -7,7 +7,7 @@ struct SwiftImageAnalyserApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(ClassificationViewModel())
+                .environmentObject(ClassificationViewModel(userPreferences: UserPreferences.sharedInstance))
         }
     }
 }
