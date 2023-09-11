@@ -12,6 +12,8 @@
 		A80FDAA82A928208008C8995 /* ClassificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80FDAA72A928208008C8995 /* ClassificationViewModel.swift */; };
 		A81F736A2A94EDCF0006E9F9 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81F73692A94EDCF0006E9F9 /* NavigationManager.swift */; };
 		A81F736E2A95182E0006E9F9 /* UserPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81F736D2A95182E0006E9F9 /* UserPreferencesView.swift */; };
+		A8776E512AAF29C70063AEBA /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A8776E502AAF29C70063AEBA /* Resnet50.mlmodel */; };
+		A8776E532AAF29D70063AEBA /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A8776E522AAF29D70063AEBA /* SqueezeNet.mlmodel */; };
 		A8C6D7F72A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6D7F62A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift */; };
 		A8C6D7F92A8F56EB00A4EA22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6D7F82A8F56EB00A4EA22 /* ContentView.swift */; };
 		A8C6D7FB2A8F56EC00A4EA22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C6D7FA2A8F56EC00A4EA22 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 		A80FDAA72A928208008C8995 /* ClassificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationViewModel.swift; sourceTree = "<group>"; };
 		A81F73692A94EDCF0006E9F9 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		A81F736D2A95182E0006E9F9 /* UserPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesView.swift; sourceTree = "<group>"; };
+		A8776E502AAF29C70063AEBA /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
+		A8776E522AAF29D70063AEBA /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
 		A8C6D7F32A8F56EB00A4EA22 /* SwiftImageAnalyser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftImageAnalyser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C6D7F62A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftImageAnalyserApp.swift; sourceTree = "<group>"; };
 		A8C6D7F82A8F56EB00A4EA22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 		A8776E4F2AAF29850063AEBA /* ClassificationModels */ = {
 			isa = PBXGroup;
 			children = (
+				A8776E502AAF29C70063AEBA /* Resnet50.mlmodel */,
+				A8776E522AAF29D70063AEBA /* SqueezeNet.mlmodel */,
 				A80FDAA52A924E82008C8995 /* MobileNetV2.mlmodel */,
 			);
 			path = ClassificationModels;
@@ -164,11 +170,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8C6D7F92A8F56EB00A4EA22 /* ContentView.swift in Sources */,
+				A8776E512AAF29C70063AEBA /* Resnet50.mlmodel in Sources */,
 				A8C6D7F72A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift in Sources */,
 				A80FDAA62A924E82008C8995 /* MobileNetV2.mlmodel in Sources */,
 				A81F736A2A94EDCF0006E9F9 /* NavigationManager.swift in Sources */,
 				A8C6D8052A8FBEDD00A4EA22 /* ClassifierComposer.swift in Sources */,
 				A81F736E2A95182E0006E9F9 /* UserPreferencesView.swift in Sources */,
+				A8776E532AAF29D70063AEBA /* SqueezeNet.mlmodel in Sources */,
 				A80FDAA82A928208008C8995 /* ClassificationViewModel.swift in Sources */,
 				A800EA432A98F3C2009443C4 /* PredictionsView.swift in Sources */,
 			);
