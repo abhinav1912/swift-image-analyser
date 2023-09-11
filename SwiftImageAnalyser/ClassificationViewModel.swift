@@ -4,7 +4,7 @@ import SwiftUI
 import Vision
 
 class ClassificationViewModel: ObservableObject {
-    lazy var classificationModel = getClassificationModel()
+    lazy var classifiers = getClassificationModels()
     var initError: CustomErrors? = nil
     @Published var predictions = [Prediction]()
     @ObservedObject var userPreferences: UserPreferences
@@ -14,10 +14,23 @@ class ClassificationViewModel: ObservableObject {
     }
 
     func detectObjects(for image: CGImage) throws {
-        guard let classificationModel else {
+        guard classifiers.count > .zero else {
             throw initError ?? CustomErrors.classifierInitFailed
         }
-        let request = VNCoreMLRequest(model: classificationModel)
+        var allPredictions = [Prediction]()
+        for classifier in classifiers {
+            do {
+                let predictions = try makePredictions(for: image, using: classifier)
+                allPredictions += predictions
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        self.predictions.append(contentsOf: allPredictions)
+    }
+
+    func makePredictions(for image: CGImage, using classifier: Classifier) throws -> [Prediction] {
+        let request = VNCoreMLRequest(model: classifier.coreModel)
         request.imageCropAndScaleOption = .centerCrop
         let handler = VNImageRequestHandler(cgImage: image)
         try handler.perform([request])
@@ -29,7 +42,8 @@ class ClassificationViewModel: ObservableObject {
         var predictions = results.map { observation in
             Prediction(
                 identifier: observation.identifier,
-                confidencePercentage: observation.confidence.description
+                confidencePercentage: observation.confidence.description,
+                model: classifier.modelType
             )
         }
 
@@ -45,24 +59,35 @@ class ClassificationViewModel: ObservableObject {
             throw CustomErrors.noClassificationResults
         }
 
-        self.predictions = predictions
+        return predictions
     }
 
     // MARK: Private Methods
-    private func getClassificationModel() -> VNCoreMLModel? {
-        do {
-            return try ClassifierComposer.createImageClassifier()
-        } catch let error as CustomErrors {
-            print(error)
-            self.initError = error
-        } catch {
-            print("Unexpected Error.")
+    private func getClassificationModels() -> [Classifier] {
+        var models = [Classifier]()
+        for classificationModel in ClassificationModel.allCases {
+            do {
+                let classifier = try ClassifierComposer.createImageClassifier(for: classificationModel)
+                models.append(
+                    Classifier(
+                        modelType: classificationModel,
+                        coreModel: classifier
+                    )
+                )
+            } catch let error as CustomErrors {
+                print(error)
+                self.initError = error
+            } catch {
+                print("Unexpected Error.")
+            }
         }
-        return nil
+        return models
     }
 }
 
 struct Prediction: Hashable {
+    let uuid: UUID = UUID()
     let identifier: String
     let confidencePercentage: String
+    let model: ClassificationModel
 }

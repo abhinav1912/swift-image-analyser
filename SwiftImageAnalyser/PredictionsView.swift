@@ -10,8 +10,8 @@ struct PredictionsView: View {
     }
 
     var body: some View {
-        ForEach(predictions, id: \.identifier) { prediction in
-            Text("\(prediction.identifier): \(prediction.confidencePercentage)")
+        ForEach(predictions, id: \.uuid) { prediction in
+            Text("\(prediction.model.rawValue.capitalized) - \(prediction.identifier): \(prediction.confidencePercentage)")
         }
     }
 }
