@@ -42,7 +42,9 @@ struct ContentView: View {
                 resetState()
             }
             .onChange(of: viewModel.predictions) { predictions in
-                navigationManager.pushToStack(.prediction(result: predictions))
+                if !predictions.isEmpty {
+                    navigationManager.pushToStack(.prediction(result: predictions))
+                }
             }
         }
     }
