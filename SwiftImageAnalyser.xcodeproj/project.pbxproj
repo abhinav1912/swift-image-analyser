@@ -44,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A8776E4F2AAF29850063AEBA /* ClassificationModels */ = {
+			isa = PBXGroup;
+			children = (
+				A80FDAA52A924E82008C8995 /* MobileNetV2.mlmodel */,
+			);
+			path = ClassificationModels;
+			sourceTree = "<group>";
+		};
 		A8C6D7EA2A8F56EB00A4EA22 = {
 			isa = PBXGroup;
 			children = (
@@ -63,7 +71,7 @@
 		A8C6D7F52A8F56EB00A4EA22 /* SwiftImageAnalyser */ = {
 			isa = PBXGroup;
 			children = (
-				A80FDAA52A924E82008C8995 /* MobileNetV2.mlmodel */,
+				A8776E4F2AAF29850063AEBA /* ClassificationModels */,
 				A8C6D7F62A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift */,
 				A8C6D7F82A8F56EB00A4EA22 /* ContentView.swift */,
 				A8C6D7FA2A8F56EC00A4EA22 /* Assets.xcassets */,
