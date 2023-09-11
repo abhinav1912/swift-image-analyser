@@ -46,6 +46,15 @@ struct ContentView: View {
                     navigationManager.pushToStack(.prediction(result: predictions))
                 }
             }
+            .alert(
+                "Error while detecting objects",
+                isPresented: $showError,
+                actions: {
+                    Button("Okay", role: .cancel) {}
+                },
+                message: {
+                    Text("Please try again.")
+                })
         }
     }
 
