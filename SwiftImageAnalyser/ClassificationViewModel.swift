@@ -1,13 +1,20 @@
 //
 
+import PhotosUI
 import SwiftUI
 import Vision
 
 class ClassificationViewModel: ObservableObject {
-    lazy var classifiers = getClassificationModels()
-    var initError: CustomErrors? = nil
-    @Published var predictions = [Prediction]()
     @ObservedObject var userPreferences: UserPreferences
+
+    @Published var predictions = [Prediction]()
+    @Published var selectedItem: PhotosPickerItem?
+    @Published var currentImage: SelectedImage?
+    // TODO: Add error types instead of a bool
+    @Published var showError = false
+
+    var initError: CustomErrors? = nil
+    lazy var classifiers = getClassificationModels()
 
     init(userPreferences: UserPreferences) {
         self.userPreferences = userPreferences
@@ -62,7 +69,14 @@ class ClassificationViewModel: ObservableObject {
         return predictions
     }
 
-    // MARK: Private Methods
+    func resetState() {
+        predictions = []
+        selectedItem = nil
+        currentImage = nil
+    }
+
+    // MARK: - Private
+
     private func getClassificationModels() -> [Classifier] {
         var models = [Classifier]()
         for classificationModel in ClassificationModel.allCases {
@@ -83,11 +97,4 @@ class ClassificationViewModel: ObservableObject {
         }
         return models
     }
-}
-
-struct Prediction: Hashable {
-    let uuid: UUID = UUID()
-    let identifier: String
-    let confidencePercentage: String
-    let model: ClassificationModel
 }

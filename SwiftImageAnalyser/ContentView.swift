@@ -7,14 +7,11 @@ import UIKit
 struct ContentView: View {
     @EnvironmentObject var viewModel: ClassificationViewModel
     @StateObject var navigationManager = NavigationManager.shared
-    @State private var selectedItem: PhotosPickerItem?
-    @State private var currentImage: SelectedImage?
-    @State private var showError = false
 
     var body: some View {
         NavigationStack(path: $navigationManager.path) {
             VStack {
-                if let currentImage {
+                if let currentImage = viewModel.currentImage {
                     Text("Current selection")
                     currentImage.image
                         .resizable()
@@ -27,9 +24,6 @@ struct ContentView: View {
                     settingsButton
                 }
             }
-            .alert("Couldn't make predictions", isPresented: self.$showError) {
-                Button("Ok", role: .cancel) {}
-            }
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .prediction(let result):
@@ -39,7 +33,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                resetState()
+                viewModel.resetState()
             }
             .onChange(of: viewModel.predictions) { predictions in
                 if !predictions.isEmpty {
@@ -48,7 +42,7 @@ struct ContentView: View {
             }
             .alert(
                 "Error while detecting objects",
-                isPresented: $showError,
+                isPresented: $viewModel.showError,
                 actions: {
                     Button("Okay", role: .cancel) {}
                 },
@@ -60,12 +54,12 @@ struct ContentView: View {
 
     var photoPicker: some View {
         PhotosPicker(
-            selection: $selectedItem,
+            selection: $viewModel.selectedItem,
             matching: .images
         ) {
             Label("Select a photo from your library", systemImage: "photo")
         }
-        .onChange(of: selectedItem) { newItem in
+        .onChange(of: viewModel.selectedItem) { newItem in
             guard let newItem else { return }
             Task {
                 if
@@ -74,7 +68,7 @@ struct ContentView: View {
                     let cgImage = image.cgImage
                 {
                     await MainActor.run {
-                        self.currentImage = SelectedImage(
+                        viewModel.currentImage = SelectedImage(
                             image: Image(uiImage: image),
                             cgImage: cgImage
                         )
@@ -94,7 +88,7 @@ struct ContentView: View {
 
     var dismissButton: some View {
         Button(action: {
-            self.currentImage = nil
+            viewModel.currentImage = nil
         }, label: {
             Label("Dismiss current selection", systemImage: "eraser")
         })
@@ -102,27 +96,19 @@ struct ContentView: View {
 
     var detectButton: some View {
         Button(action: {
-            if let currentImage {
+            if let currentImage = viewModel.currentImage {
                 do {
                     try viewModel.detectObjects(for: currentImage.cgImage)
                 } catch {
                     print(error)
-                    self.showError = true
+                    viewModel.showError = true
                 }
             } else {
-                self.showError = true
+                viewModel.showError = true
             }
         }, label: {
             Label("Detect objects in the image", systemImage: "checkmark")
         })
-    }
-
-    // MARK: Private methods
-
-    private func resetState() {
-        viewModel.predictions = []
-        selectedItem = nil
-        currentImage = nil
     }
 }
 

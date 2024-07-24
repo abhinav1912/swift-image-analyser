@@ -19,6 +19,7 @@
 		A8C6D7FB2A8F56EC00A4EA22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C6D7FA2A8F56EC00A4EA22 /* Assets.xcassets */; };
 		A8C6D7FE2A8F56EC00A4EA22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C6D7FD2A8F56EC00A4EA22 /* Preview Assets.xcassets */; };
 		A8C6D8052A8FBEDD00A4EA22 /* ClassifierComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6D8042A8FBEDD00A4EA22 /* ClassifierComposer.swift */; };
+		A8EB08482C513DE400AAE861 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EB08472C513DE400AAE861 /* Prediction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		A8C6D7FA2A8F56EC00A4EA22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8C6D7FD2A8F56EC00A4EA22 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A8C6D8042A8FBEDD00A4EA22 /* ClassifierComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifierComposer.swift; sourceTree = "<group>"; };
+		A8EB08472C513DE400AAE861 /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +79,7 @@
 		A8C6D7F52A8F56EB00A4EA22 /* SwiftImageAnalyser */ = {
 			isa = PBXGroup;
 			children = (
-				A8776E4F2AAF29850063AEBA /* ClassificationModels */,
+				A8EB08462C513DCE00AAE861 /* Models */,
 				A8C6D7F62A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift */,
 				A8C6D7F82A8F56EB00A4EA22 /* ContentView.swift */,
 				A8C6D7FA2A8F56EC00A4EA22 /* Assets.xcassets */,
@@ -97,6 +99,15 @@
 				A8C6D7FD2A8F56EC00A4EA22 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A8EB08462C513DCE00AAE861 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A8776E4F2AAF29850063AEBA /* ClassificationModels */,
+				A8EB08472C513DE400AAE861 /* Prediction.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 				A8C6D7F92A8F56EB00A4EA22 /* ContentView.swift in Sources */,
 				A8776E512AAF29C70063AEBA /* Resnet50.mlmodel in Sources */,
 				A8C6D7F72A8F56EB00A4EA22 /* SwiftImageAnalyserApp.swift in Sources */,
+				A8EB08482C513DE400AAE861 /* Prediction.swift in Sources */,
 				A80FDAA62A924E82008C8995 /* MobileNetV2.mlmodel in Sources */,
 				A81F736A2A94EDCF0006E9F9 /* NavigationManager.swift in Sources */,
 				A8C6D8052A8FBEDD00A4EA22 /* ClassifierComposer.swift in Sources */,
